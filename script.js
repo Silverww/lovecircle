@@ -302,11 +302,17 @@ function loadNode(nodeId) {
     if (node.monologue) {
         typewriterEffect(elements.monologueText, node.monologue, () => {
             elements.monologueBox.classList.add('visible');
+            if (nodeId === 'BE_Murder_Knock') {
+                playMurderKnock();
+            }
             setTimeout(() => {
                 showDialogue(node);
             }, 500);
         });
     } else {
+        if (nodeId === 'BE_Murder_Knock') {
+            playMurderKnock();
+        }
         showDialogue(node);
     }
 
@@ -316,10 +322,6 @@ function loadNode(nodeId) {
     // Apply murder ending filter if needed
     if (nodeId === 'BE_Murder') {
         triggerMurderEnding();
-    }
-
-    if (nodeId === 'BE_Murder_Knock') {
-        playMurderKnock();
     }
 
     // 故事推行器：如果当前节点不是结局节点，且打字完成后没有选项按钮，
@@ -530,9 +532,9 @@ function replaceNames(text) {
     if (!text) return '';
 
     if (gameState.isBabyMode) {
+        text = text.replace(/小狗们/g, '我们');
         text = text.replace(/马子潇/g, '宝宝');
         text = text.replace(/韦淼芊/g, '宝宝');
-        text = text.replace(/我/g, '小狗');
     }
 
     return text;
@@ -620,12 +622,12 @@ function triggerMurderEnding() {
     audioManager.playSE('be_theme.mp3');
 }
 function playMurderKnock() {
-    const knockSpeeds = [1000, 1500, 2000];
-    knockSpeeds.forEach((delay, index) => {
+    const knockDelays = [0, 900, 1800];
+    knockDelays.forEach(delay => {
         setTimeout(() => {
             audioManager.playSE('assets/sounds/heavy_knock.mp3');
             shakeDialogueBox();
-        }, delay * (index + 1));
+        }, delay);
     });
 }
 
