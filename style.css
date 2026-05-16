@@ -659,6 +659,11 @@ body {
     75% { transform: translateX(-5px); }
 }
 
+/* 物理敲门震动类（补充在文件末尾以保证优先级） */
+.dialogue-box.knock-shake {
+    animation: knock-shake 0.08s ease-in-out 4 !important;
+}
+
 @keyframes danger-pulse {
     0%, 100% {
         box-shadow: 0 0 30px rgba(255, 46, 99, 0.4), inset 0 0 30px rgba(255, 46, 99, 0.1);

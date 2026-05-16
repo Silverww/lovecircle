@@ -300,17 +300,23 @@ function loadNode(nodeId) {
 
     // Show monologue first
     if (node.monologue) {
-        if (nodeId === 'BE_Murder_Knock') {
-            playMurderKnock();
-        }
+        // 🚨 移除了原在这里的 playMurderKnock() 错位触发
         typewriterEffect(elements.monologueText, node.monologue, () => {
             elements.monologueBox.classList.add('visible');
             setTimeout(() => {
                 showDialogue(node);
+
+                // 🔥 精准卡点：在对话框整体结构显示完成后触发音频与敲门震动
+                if (nodeId === 'BE_Murder_Knock') {
+                    playMurderKnock();
+                }
             }, 500);
         });
     } else {
         showDialogue(node);
+        if (nodeId === 'BE_Murder_Knock') {
+            playMurderKnock();
+        }
     }
 
     // Update flowchart
