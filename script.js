@@ -300,19 +300,16 @@ function loadNode(nodeId) {
 
     // Show monologue first
     if (node.monologue) {
+        if (nodeId === 'BE_Murder_Knock') {
+            playMurderKnock();
+        }
         typewriterEffect(elements.monologueText, node.monologue, () => {
             elements.monologueBox.classList.add('visible');
-            if (nodeId === 'BE_Murder_Knock') {
-                playMurderKnock();
-            }
             setTimeout(() => {
                 showDialogue(node);
             }, 500);
         });
     } else {
-        if (nodeId === 'BE_Murder_Knock') {
-            playMurderKnock();
-        }
         showDialogue(node);
     }
 
