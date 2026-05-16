@@ -1,0 +1,1210 @@
+/* ========================================
+   马子潇的恋爱循环 - Style Sheet
+   ======================================== */
+
+:root {
+    --color-primary: #0a0a0f;
+    --color-secondary: #12121a;
+    --color-accent: #ff2e6c;
+    --color-danger: #ff2e63;
+    --color-text: #e8e8e8;
+    --color-text-dim: #6a6a7a;
+    --color-jyb: #4da6ff;
+    --color-love: #ff6b9d;
+    --color-glass: rgba(255, 255, 255, 0.03);
+    --color-glass-border: rgba(255, 255, 255, 0.08);
+    --font-main: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: var(--font-main);
+    background: var(--color-primary);
+    color: var(--color-text);
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* ========================================
+   Floating Particles Background
+   ======================================== */
+#particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 46, 108, 0.8), rgba(255, 46, 108, 0.1));
+    box-shadow: 0 0 10px rgba(255, 46, 108, 0.3);
+    animation: float-particle linear infinite;
+    opacity: 0.6;
+}
+
+.particle:nth-child(even) {
+    background: radial-gradient(circle at 30% 30%, rgba(77, 166, 255, 0.6), rgba(77, 166, 255, 0.1));
+    box-shadow: 0 0 10px rgba(77, 166, 255, 0.3);
+}
+
+.particle:nth-child(3n) {
+    background: radial-gradient(circle at 30% 30%, rgba(255, 107, 157, 0.5), rgba(255, 107, 157, 0.1));
+    box-shadow: 0 0 10px rgba(255, 107, 157, 0.3);
+}
+
+@keyframes float-particle {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ========================================
+   Screen Management
+   ======================================== */
+.screen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* ========================================
+   Title Screen
+   ======================================== */
+#title-screen {
+    background: transparent;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title-content {
+    text-align: center;
+    animation: fadeIn 1.5s ease-out, pulse-glow 3s ease-in-out infinite;
+    position: relative;
+    z-index: 20;
+}
+
+.game-title {
+    font-size: 4rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ff2e6c 0%, #ff6b9d 25%, #ff2e6c 50%, #ff6b9d 75%, #ff2e6c 100%);
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 4s linear infinite, pulse-glow 2s ease-in-out infinite;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 60px rgba(255, 46, 108, 0.5);
+    filter: drop-shadow(0 0 30px rgba(255, 46, 108, 0.4));
+}
+
+.subtitle {
+    font-size: 1.3rem;
+    color: var(--color-text-dim);
+    letter-spacing: 0.8em;
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+}
+
+.title-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+}
+
+.completion-display {
+    margin-top: 3rem;
+    font-size: 0.9rem;
+    color: var(--color-text-dim);
+    letter-spacing: 0.1em;
+}
+
+/* ========================================
+   Buttons
+   ======================================== */
+.btn {
+    padding: 1rem 3rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-family: var(--font-main);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    min-width: 220px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--color-accent), #ff4d7f);
+    color: white;
+    box-shadow: 0 5px 30px rgba(255, 46, 108, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 40px rgba(255, 46, 108, 0.7);
+}
+
+.btn-secondary {
+    background: var(--color-glass);
+    border: 1px solid var(--color-glass-border);
+    color: var(--color-text);
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--color-accent);
+    transform: translateX(5px);
+    box-shadow: 0 0 20px rgba(255, 46, 108, 0.2);
+}
+
+.btn-back {
+    background: transparent;
+    border: 1px solid var(--color-glass-border);
+    color: var(--color-text-dim);
+    margin-top: 2rem;
+}
+
+.btn-back:hover {
+    border-color: var(--color-text);
+    color: var(--color-text);
+}
+
+.btn-cancel {
+    background: var(--color-glass);
+    border: 1px solid var(--color-glass-border);
+    color: var(--color-text);
+    margin-top: 1rem;
+}
+
+/* ========================================
+   Glassmorphism Panels
+   ======================================== */
+.glass-panel {
+    background: var(--color-glass);
+    border: 1px solid var(--color-glass-border);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* ========================================
+   Save/Load Slots
+   ======================================== */
+.save-slots {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+    padding: 1.5rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.save-slot {
+    background: var(--color-glass);
+    border: 1px solid var(--color-glass-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    min-height: 120px;
+    position: relative;
+    overflow: hidden;
+}
+
+.save-slot::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 46, 108, 0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.save-slot:hover:not(.empty)::before {
+    opacity: 1;
+}
+
+.save-slot:hover:not(.empty) {
+    border-color: var(--color-accent);
+    transform: scale(1.03) translateY(-2px);
+    box-shadow: 0 10px 30px rgba(255, 46, 108, 0.2);
+}
+
+.save-slot.empty {
+    opacity: 0.4;
+    cursor: default;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--color-text-dim);
+    border-style: dashed;
+}
+
+.save-slot-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--color-accent);
+}
+
+.save-slot-info {
+    font-size: 0.85rem;
+    color: var(--color-text-dim);
+}
+
+.save-slot-scene {
+    font-size: 0.8rem;
+    color: var(--color-text-dim);
+    margin-top: 0.5rem;
+    opacity: 0.7;
+}
+
+/* ========================================
+   Gallery Grid
+   ======================================== */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1.2rem;
+    padding: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    max-height: 65vh;
+    overflow-y: auto;
+}
+
+.gallery-item {
+    background: var(--color-glass);
+    border: 1px solid var(--color-glass-border);
+    border-radius: 16px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.gallery-item::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, transparent, rgba(255, 46, 108, 0.1), transparent 30%);
+    animation: rotate-border 4s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.gallery-item:not(.locked):hover::before {
+    opacity: 1;
+}
+
+.gallery-item:not(.locked):hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(255, 46, 108, 0.3);
+}
+
+.gallery-item.locked {
+    filter: grayscale(100%);
+    opacity: 0.3;
+}
+
+.gallery-item:not(.locked) {
+    border-color: rgba(255, 46, 108, 0.3);
+}
+
+.gallery-item-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-top: 0.8rem;
+}
+
+.gallery-item-type {
+    font-size: 0.75rem;
+    color: var(--color-text-dim);
+    margin-top: 0.3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+@keyframes rotate-border {
+    100% { transform: rotate(360deg); }
+}
+
+/* ========================================
+   Game Screen Layout
+   ======================================== */
+#game-screen {
+    background: transparent;
+    flex-direction: column;
+}
+
+#background-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.6) saturate(0.8);
+    transition: filter 1s ease;
+}
+
+#character-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.character-sprite {
+    height: 75%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    opacity: 0;
+    transition: opacity 0.8s ease, filter 0.5s ease, transform 0.3s ease;
+    filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));
+}
+
+.character-sprite.visible {
+    opacity: 1;
+    animation: character-appear 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.character-sprite.dark {
+    filter: brightness(60%) drop-shadow(0 0 20px rgba(0,0,0,0.5));
+}
+
+.character-sprite:hover {
+    transform: scale(1.02);
+}
+
+@keyframes character-appear {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ========================================
+   Main Game Layout
+   ======================================== */
+.game-main {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    height: 100%;
+    padding: 1.5rem;
+}
+
+/* ========================================
+   Flowchart Panel
+   ======================================== */
+.flowchart-panel {
+    width: 220px;
+    background: var(--color-glass);
+    border: 1px solid var(--color-glass-border);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    padding: 1.2rem;
+    margin-right: 1.5rem;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.flowchart-panel h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: var(--color-accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.flowchart-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.flowchart-node {
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.flowchart-node::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--color-accent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.flowchart-node:hover::before {
+    opacity: 1;
+}
+
+.flowchart-node.locked {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--color-text-dim);
+    cursor: not-allowed;
+}
+
+.flowchart-node.unlocked {
+    background: rgba(255, 46, 108, 0.08);
+    border-color: rgba(255, 46, 108, 0.2);
+}
+
+.flowchart-node.unlocked:hover {
+    background: rgba(255, 46, 108, 0.15);
+    border-color: var(--color-accent);
+    transform: translateX(3px);
+}
+
+.flowchart-node.current {
+    background: linear-gradient(135deg, var(--color-accent), #ff4d7f);
+    color: white;
+    box-shadow: 0 0 20px rgba(255, 46, 108, 0.4);
+}
+
+/* ========================================
+   Narrative Area
+   ======================================== */
+.narrative-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 3rem;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.narrative-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+/* ========================================
+   Monologue Box
+   ======================================== */
+.monologue-box {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 16px;
+    padding: 1.2rem 1.8rem;
+    margin-bottom: 0.8rem;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-left: 3px solid var(--color-accent);
+}
+
+.monologue-box.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.dialogue-box.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.monologue-text {
+    font-style: italic;
+    color: var(--color-text-dim);
+    line-height: 2;
+    font-size: 1.05rem;
+    min-height: 2em;
+}
+
+/* ========================================
+   Dialogue Box
+   ======================================== */
+.dialogue-box {
+    background: var(--color-glass);
+    border: 2px solid var(--color-glass-border);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    padding: 1.5rem 2rem;
+    transition: all 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.dialogue-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 46, 108, 0.05), transparent);
+    pointer-events: none;
+}
+
+.dialogue-box.danger {
+    border-color: var(--color-danger);
+    box-shadow: 0 0 30px rgba(255, 46, 99, 0.4), inset 0 0 30px rgba(255, 46, 99, 0.1);
+    animation: danger-pulse 1.5s ease-in-out infinite;
+}
+
+.dialogue-box.panic {
+    border-color: var(--color-danger);
+    box-shadow: 0 0 50px rgba(255, 46, 99, 0.6), inset 0 0 50px rgba(255, 46, 99, 0.15);
+    animation: panic-shake 0.3s ease-in-out infinite, danger-pulse 1s ease-in-out infinite;
+}
+
+@keyframes danger-pulse {
+    0%, 100% {
+        box-shadow: 0 0 30px rgba(255, 46, 99, 0.4), inset 0 0 30px rgba(255, 46, 99, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 50px rgba(255, 46, 99, 0.6), inset 0 0 50px rgba(255, 46, 99, 0.15);
+    }
+}
+
+.speaker-name {
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 0.8rem;
+    font-size: 1.05rem;
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 10px rgba(255, 46, 108, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.speaker-emoji {
+    font-size: 1.4rem;
+    margin-left: auto;
+    opacity: 0.8;
+}
+
+.dialogue-text {
+    line-height: 2;
+    font-size: 1.1rem;
+    min-height: 2em;
+}
+
+/* ========================================
+   Choice Panel
+   ======================================== */
+.choice-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+}
+
+.choice-btn {
+    background: var(--color-glass);
+    border: 1px solid var(--color-glass-border);
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    color: var(--color-text);
+    font-family: var(--font-main);
+    font-size: 1rem;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.choice-btn::before {
+    content: '▸';
+    position: absolute;
+    left: -20px;
+    opacity: 0;
+    color: var(--color-accent);
+    transition: all 0.3s ease;
+}
+
+.choice-btn:hover {
+    background: rgba(255, 46, 108, 0.15);
+    border-color: var(--color-accent);
+    transform: translateX(10px);
+    padding-left: 2.5rem;
+    box-shadow: 0 0 20px rgba(255, 46, 108, 0.2);
+}
+
+.choice-btn:hover::before {
+    left: 1rem;
+    opacity: 1;
+}
+
+.choice-btn:active {
+    transform: scale(0.98);
+}
+
+/* ========================================
+   JYB Float Text
+   ======================================== */
+.jyb-float {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1rem 2.5rem;
+    background: rgba(77, 166, 255, 0.1);
+    border: 1px solid var(--color-jyb);
+    border-radius: 30px;
+    color: var(--color-jyb);
+    font-style: italic;
+    opacity: 0;
+    z-index: 100;
+    pointer-events: none;
+    box-shadow: 0 0 30px rgba(77, 166, 255, 0.2);
+}
+
+/* ========================================
+   Game Menu
+   ======================================== */
+.game-menu {
+    position: fixed;
+    top: 1.2rem;
+    right: 240px;
+    display: flex;
+    gap: 0.6rem;
+    z-index: 50;
+}
+
+.menu-btn {
+    background: var(--color-glass);
+    border: 1px solid var(--color-glass-border);
+    border-radius: 10px;
+    padding: 0.6rem 1.2rem;
+    color: var(--color-text);
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.menu-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--color-accent);
+    box-shadow: 0 0 15px rgba(255, 46, 108, 0.2);
+}
+
+/* ========================================
+   Status Display
+   ======================================== */
+.status-display {
+    position: fixed;
+    bottom: 1.2rem;
+    left: 1.2rem;
+    display: flex;
+    gap: 2rem;
+    font-size: 0.9rem;
+    background: var(--color-glass);
+    border: 1px solid var(--color-glass-border);
+    border-radius: 12px;
+    padding: 0.8rem 1.5rem;
+    backdrop-filter: blur(10px);
+    z-index: 50;
+}
+
+#love-display {
+    color: var(--color-love);
+    text-shadow: 0 0 10px rgba(255, 107, 157, 0.3);
+}
+
+#obsession-display {
+    color: var(--color-danger);
+    text-shadow: 0 0 10px rgba(255, 46, 99, 0.3);
+}
+
+/* ========================================
+   Overlay Panels
+   ======================================== */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+    backdrop-filter: blur(10px);
+}
+
+.overlay.active {
+    display: flex;
+}
+
+.overlay h3 {
+    margin-bottom: 1.5rem;
+    color: var(--color-accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ========================================
+   Settings Panel
+   ======================================== */
+#settings-panel {
+    flex-direction: column;
+    background: rgba(10, 10, 15, 0.95);
+    padding: 2.5rem;
+    border-radius: 24px;
+    min-width: 400px;
+    border: 1px solid var(--color-glass-border);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.setting-item {
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.setting-item label {
+    min-width: 90px;
+    font-size: 0.95rem;
+}
+
+.setting-item input[type="range"] {
+    flex: 1;
+    accent-color: var(--color-accent);
+    height: 6px;
+}
+
+/* ========================================
+   Error Display
+   ======================================== */
+#error-display {
+    flex-direction: column;
+}
+
+.error-content {
+    text-align: center;
+    background: var(--color-glass);
+    border: 1px solid var(--color-danger);
+    border-radius: 24px;
+    padding: 3rem 4rem;
+}
+
+.error-content h2 {
+    color: var(--color-danger);
+    margin-bottom: 1rem;
+}
+
+.error-content p {
+    color: var(--color-text-dim);
+    margin-bottom: 2rem;
+}
+
+/* ========================================
+   Branch Viewer
+   ======================================== */
+#branch-viewer {
+    z-index: 300;
+}
+
+.branch-viewer-content {
+    background: rgba(10, 10, 15, 0.98);
+    border: 1px solid var(--color-glass-border);
+    border-radius: 24px;
+    padding: 2rem;
+    max-width: 90vw;
+    max-height: 85vh;
+    overflow-y: auto;
+    min-width: 600px;
+}
+
+.branch-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-glass-border);
+}
+
+.branch-header h3 {
+    margin-bottom: 0;
+}
+
+.branch-tree {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    position: relative;
+}
+
+.branch-tree::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--color-accent), transparent);
+    opacity: 0.3;
+}
+
+.branch-node {
+    padding: 0.6rem 1rem 0.6rem 2.5rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    position: relative;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.branch-node::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 2px;
+    background: var(--color-glass-border);
+}
+
+.branch-node::after {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: var(--color-glass-border);
+    display: none;
+}
+
+.branch-node.has-children::after {
+    display: block;
+}
+
+.branch-node.unvisited {
+    color: var(--color-text-dim);
+    cursor: not-allowed;
+}
+
+.branch-node.visited {
+    border-color: rgba(77, 166, 255, 0.2);
+    background: rgba(77, 166, 255, 0.05);
+}
+
+.branch-node.visited::before {
+    background: var(--color-jyb);
+}
+
+.branch-node.current {
+    background: linear-gradient(135deg, var(--color-accent), #ff4d7f);
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 46, 108, 0.4);
+}
+
+.branch-node.current::before {
+    background: white;
+}
+
+.branch-node.current::after {
+    background: rgba(255,255,255,0.3);
+}
+
+.branch-node:hover:not(.unvisited) {
+    transform: translateX(5px);
+    border-color: var(--color-accent);
+}
+
+.branch-node.unvisited:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.branch-level-0 { margin-left: 0; }
+.branch-level-1 { margin-left: 1.2rem; }
+.branch-level-2 { margin-left: 2.4rem; }
+.branch-level-3 { margin-left: 3.6rem; }
+.branch-level-4 { margin-left: 4.8rem; }
+.branch-level-5 { margin-left: 6rem; }
+
+.branch-chosen {
+    color: var(--color-jyb);
+    font-style: italic;
+    font-size: 0.8rem;
+}
+
+.branch-end-marker {
+    display: inline-block;
+    margin-left: 0.5rem;
+    font-size: 0.7rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    background: rgba(255, 46, 108, 0.2);
+    color: var(--color-accent);
+}
+
+/* ========================================
+   Black & White Filter (命案BE)
+   ======================================== */
+body.murder-ending {
+    filter: grayscale(100%) brightness(50%) sepia(20%);
+    transition: filter 2s ease-in-out;
+}
+
+/* ========================================
+   Breaking BE Visual Effects
+   ======================================== */
+.dialogue-box.shaking {
+    animation: red-shake 0.4s ease-in-out infinite;
+    border-color: var(--color-danger) !important;
+}
+
+.dialogue-box.red-blue-flash {
+    animation: red-blue-flash 0.15s ease-in-out infinite;
+    border-color: var(--color-danger) !important;
+}
+
+@keyframes red-shake {
+    0%, 100% { transform: translateX(0); }
+    10% { transform: translateX(-5px) rotate(-0.5deg); }
+    20% { transform: translateX(5px) rotate(0.5deg); }
+    30% { transform: translateX(-4px); }
+    40% { transform: translateX(4px); }
+    50% { transform: translateX(-3px) rotate(-0.3deg); }
+    60% { transform: translateX(3px) rotate(0.3deg); }
+    70% { transform: translateX(-2px); }
+    80% { transform: translateX(2px); }
+    90% { transform: translateX(-1px); }
+}
+
+@keyframes red-blue-flash {
+    0%, 100% {
+        border-color: var(--color-danger);
+        box-shadow: 0 0 30px rgba(255, 46, 99, 0.6), inset 0 0 20px rgba(255, 46, 99, 0.15);
+    }
+    50% {
+        border-color: var(--color-jyb);
+        box-shadow: 0 0 30px rgba(77, 166, 255, 0.6), inset 0 0 20px rgba(77, 166, 255, 0.15);
+    }
+}
+
+.monologue-box.breaking {
+    border-left-color: var(--color-danger);
+    animation: red-glow 0.8s ease-in-out infinite;
+}
+
+.speaker-name.danger-text {
+    color: var(--color-danger) !important;
+    animation: text-flicker 0.1s ease-in-out infinite;
+}
+
+@keyframes text-flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* ========================================
+   Animations
+   ======================================== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+    to { background-position: -300% center; }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { filter: drop-shadow(0 0 30px rgba(255, 46, 108, 0.4)); }
+    50% { filter: drop-shadow(0 0 50px rgba(255, 46, 108, 0.6)); }
+}
+
+@keyframes panic-shake {
+    0%, 100% { transform: translateX(0); }
+    10% { transform: translateX(-4px) rotate(-0.5deg); }
+    20% { transform: translateX(4px) rotate(0.5deg); }
+    30% { transform: translateX(-3px); }
+    40% { transform: translateX(3px); }
+    50% { transform: translateX(-2px) rotate(-0.3deg); }
+    60% { transform: translateX(2px) rotate(0.3deg); }
+    70% { transform: translateX(-3px); }
+    80% { transform: translateX(3px); }
+    90% { transform: translateX(-1px); }
+}
+
+@keyframes floatUp {
+    0% { opacity: 0; transform: translate(-50%, 15px); }
+    15% { opacity: 1; transform: translate(-50%, 0); }
+    85% { opacity: 1; transform: translate(-50%, -25px); }
+    100% { opacity: 0; transform: translate(-50%, -40px); }
+}
+
+@keyframes redGlow {
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 46, 99, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(255, 46, 99, 0.6); }
+}
+
+/* ========================================
+   Ending Screen Styles
+   ======================================== */
+.ending-title {
+    font-size: 1.8rem;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+    text-align: center;
+    text-shadow: 0 0 20px rgba(255, 46, 108, 0.5);
+}
+
+.ending-description {
+    color: var(--color-text-dim);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.ending-content {
+    text-align: center;
+    padding: 2rem;
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+@media (max-width: 900px) {
+    .flowchart-panel {
+        display: none;
+    }
+
+    .game-menu {
+        right: 1rem;
+        top: 0.8rem;
+    }
+
+    .save-slots {
+        grid-template-columns: 1fr;
+    }
+
+    .game-title {
+        font-size: 2.5rem;
+    }
+
+    .narrative-area {
+        padding: 0 1rem 2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .game-title {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+        letter-spacing: 0.3em;
+    }
+
+    .btn {
+        min-width: 180px;
+        padding: 0.8rem 2rem;
+    }
+}
