@@ -419,7 +419,7 @@
       "choices": [
         {
           "text": "你怎么知道的",
-          "next": "walk_together",
+          "next": "coffee_shop_chat",
           "effects": {
             "love": 8
           },
@@ -427,11 +427,42 @@
         },
         {
           "text": "（接过咖啡）谢谢",
-          "next": "walk_together",
+          "next": "coffee_shop_chat",
           "effects": {
             "love": 5
           },
           "comment": "感谢"
+        }
+      ]
+    },
+    "coffee_shop_chat": {
+      "id": "coffee_shop_chat",
+      "background": "cafe",
+      "characters": {
+        "right": "miaoqian"
+      },
+      "monologue": "我们绕过人群，走进附近的一家小咖啡馆。吧台里的小姐姐对我们笑了笑，手里端着两杯新鲜的热拿铁。店里的气味里混着咖啡、奶泡和甜甜圈的香味，让人一下子放松了几分。",
+      "dialogue": {
+        "speaker": "店员",
+        "text": "两位今天来得正好，我们新推出了草莓奶油卷，情侣点单还可以打八五折哦。"
+      },
+      "choices": [
+        {
+          "text": "我们只是随便喝杯咖啡",
+          "next": "love_discussion_1",
+          "effects": {
+            "love": 2
+          },
+          "comment": "拒绝推销"
+        },
+        {
+          "text": "那就来两个奶油卷吧",
+          "next": "love_discussion_1",
+          "effects": {
+            "love": 3,
+            "obsession": 2
+          },
+          "comment": "答应试试"
         }
       ]
     },
@@ -1649,7 +1680,7 @@
       "choices": [
         {
           "text": "（震惊）",
-          "next": "BE_Murder",
+          "next": "BE_Murder_Realization",
           "effects": {}
         }
       ]
@@ -1682,7 +1713,7 @@
       "id": "BE_Normal1",
       "background": "street",
       "characters": {},
-      "monologue": "毕业后，我们各奔东西。她留在本地，我去了深圳。刚开始还视频，后来频率越来越低，再后来连赞都不点了。这段感情就这样淡了，像很多普通情侣一样。偶尔在同学聚会上遇见她，她只是礼貌性地点个头。我们都明白，那种感觉已经不在了。",
+      "monologue": "毕业后，我们各奔东西。她留在本地。刚开始还视频，后来频率越来越低，再后来连赞都不点了。这段感情就这样淡了，像很多普通情侣一样。偶尔在同学聚会上遇见她，她只是礼貌性地点个头。我们都明白，那种感觉已经不在了。",
       "dialogue": {
         "speaker": "",
         "text": ""
@@ -3892,6 +3923,59 @@
       "choices": [
         {
           "text": "（震惊）发生了什么",
+          "next": "BE_Murder_Realization",
+          "effects": {}
+        }
+      ]
+    },
+    "BE_Murder_Realization": {
+      "id": "BE_Murder_Realization",
+      "background": "room",
+      "characters": {},
+      "monologue": "电视屏幕在黑暗中忽明忽暗。新闻播报员毫无感情的声音在空荡荡的房间回荡：‘……今晨发现一名年轻女性身亡家中，现场痕迹显示曾发生剧烈冲突。警方在现场发现了一枚独特的挂件，呼吁知情人士提供线索……’",
+      "dialogue": {
+        "speaker": "电视",
+        "text": "（屏幕展示挂件特写）‘警方表示，这枚挂件极具辨识度，可能是破案的关键……’"
+      },
+      "choices": [
+        {
+          "text": "（震惊）",
+          "next": "BE_Murder_Knock",
+          "effects": {}
+        }
+      ]
+    },
+    "BE_Murder_Knock": {
+      "id": "BE_Murder_Knock",
+      "background": "room",
+      "characters": {},
+      "monologue": "房间里安静得只能听到我粗重的呼吸声。突然——‘咚。咚。咚。’沉闷的敲门声像重锤一样砸在我的心脏上。敲门声并不急促，反而带着一种令人发指的节奏感，仿佛她知道我就缩在门后，正隔着木板欣赏我的恐惧。",
+      "dialogue": {
+        "speaker": "",
+        "text": ""
+      },
+      "choices": [
+        {
+          "text": "（屏住呼吸）",
+          "next": "BE_Murder_Final",
+          "effects": {}
+        }
+      ]
+    },
+    "BE_Murder_Final": {
+      "id": "BE_Murder_Final",
+      "background": "room",
+      "characters": {
+        "right": "miaoqian"
+      },
+      "monologue": "门外传来了那个熟悉到让我颤抖的声音。那声音依旧轻柔，却像蛇一样缠绕上我的脖颈，一点点收紧。",
+      "dialogue": {
+        "speaker": "韦淼芊",
+        "text": "宝宝，我想你了……开门让我见见你好不好？（轻笑声）警察叔叔都在找那个‘挂件’的主人呢，你……会保护我的，对吧？别怕，只要门开了，我们就永远不分开了。"
+      },
+      "choices": [
+        {
+          "text": "（绝望）",
           "next": "BE_Murder",
           "effects": {}
         }
@@ -3930,9 +4014,14 @@
       "unlock_condition": "school_gate"
     },
     {
+      "id": "coffee_shop_chat",
+      "name": "咖啡馆闲聊",
+      "unlock_condition": "walk_together"
+    },
+    {
       "id": "love_discussion_1",
       "name": "关于爱",
-      "unlock_condition": "walk_together"
+      "unlock_condition": "coffee_shop_chat"
     },
     {
       "id": "deepening_relationship",
@@ -4010,9 +4099,24 @@
       "unlock_condition": "help_friend_a"
     },
     {
+      "id": "BE_Murder_Realization",
+      "name": "命案真相",
+      "unlock_condition": "morning_after_murder"
+    },
+    {
+      "id": "BE_Murder_Knock",
+      "name": "敲门声",
+      "unlock_condition": "BE_Murder_Realization"
+    },
+    {
+      "id": "BE_Murder_Final",
+      "name": "最后一击",
+      "unlock_condition": "BE_Murder_Knock"
+    },
+    {
       "id": "BE_Murder",
       "name": "命案结局",
-      "unlock_condition": "morning_after_murder"
+      "unlock_condition": "BE_Murder_Final"
     },
     {
       "id": "BE_Normal1",

@@ -648,6 +648,17 @@ body {
     animation: panic-shake 0.3s ease-in-out infinite, danger-pulse 1s ease-in-out infinite;
 }
 
+.dialogue-box.knock-shake {
+    animation: knock-shake 0.08s ease-in-out 4;
+}
+
+@keyframes knock-shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    50% { transform: translateX(8px); }
+    75% { transform: translateX(-5px); }
+}
+
 @keyframes danger-pulse {
     0%, 100% {
         box-shadow: 0 0 30px rgba(255, 46, 99, 0.4), inset 0 0 30px rgba(255, 46, 99, 0.1);

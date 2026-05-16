@@ -318,6 +318,10 @@ function loadNode(nodeId) {
         triggerMurderEnding();
     }
 
+    if (nodeId === 'BE_Murder_Knock') {
+        playMurderKnock();
+    }
+
     // 故事推行器：如果当前节点不是结局节点，且打字完成后没有选项按钮，
     // 自动显示一个"继续..."按钮，点击后跳转到的下一个逻辑节点
     setTimeout(() => {
@@ -615,7 +619,24 @@ function triggerMurderEnding() {
     document.body.classList.add('murder-ending');
     audioManager.playSE('be_theme.mp3');
 }
+function playMurderKnock() {
+    const knockSpeeds = [1000, 1500, 2000];
+    knockSpeeds.forEach((delay, index) => {
+        setTimeout(() => {
+            audioManager.playSE('assets/sounds/heavy_knock.mp3');
+            shakeDialogueBox();
+        }, delay * (index + 1));
+    });
+}
 
+function shakeDialogueBox() {
+    const box = elements.dialogueBox;
+    if (!box) return;
+    box.classList.add('knock-shake');
+    setTimeout(() => {
+        box.classList.remove('knock-shake');
+    }, 600);
+}
 // ========================================
 // Stats Display
 // ========================================
